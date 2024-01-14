@@ -1,7 +1,7 @@
 import json
 
 from fetch_func import fetch_search_results
-from read_keywords_func import read_keywords_from_file
+from read_keywords_func import read_keywords_by_line_from_file
 
 # read the api key and cse id from the config.json file
 with open('./config.json') as f:
@@ -11,7 +11,7 @@ with open('./config.json') as f:
 
 # read the keywords from the keywords.txt file
 keywords_file = "./keywords_vega.txt"
-keywords = read_keywords_from_file(keywords_file)
+keywords = read_keywords_by_line_from_file(keywords_file)
 
 # Executing
 serp_results = {}
@@ -26,6 +26,9 @@ for keyword, results in serp_results.items():
     for index, result in enumerate(results):
         print(f"Result {index + 1}:")
         print(f"Title: {result['title']}")
-        print(f"Snippet: {result['snippet']}")
+        if not "snippet" in result:
+            print("Snippet: None")
+        else:
+            print(f"Snippet: {result['snippet']}")
         print(f"Link: {result['link']}")
         print()

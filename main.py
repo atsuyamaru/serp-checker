@@ -1,15 +1,16 @@
-from fetch import fetch_search_results
-from read_keywords import read_keywords_from_file
+import json
+
+from fetch_func import fetch_search_results
+from read_keywords_func import read_keywords_from_file
 
 # read the api key and cse id from the config.json file
-import json
 with open('./config.json') as f:
     config = json.load(f)
     api_key = config['google-api-key']
     cse_id = config['search-engine-id']
 
 # read the keywords from the keywords.txt file
-keywords_file = "./keywords.txt"
+keywords_file = "./keywords_vega.txt"
 keywords = read_keywords_from_file(keywords_file)
 
 # Executing
